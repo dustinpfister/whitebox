@@ -1,0 +1,6 @@
+# Main todo list for whitebox
+
+* 0.0.x
+
+  * uses phaser for state management
+  * started a wb_jumper_string.js file that is used to read a jumper string

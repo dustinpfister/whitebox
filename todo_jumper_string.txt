@@ -1,0 +1,7 @@
+## JumperString
+
+One idea that I seek to implement in this project is the concept of something I have come to call a jumper string. This is a binary string that sets white box up with a certain state, informing white box of certain things like, what game mode is to be used, what features are enabled, and things to that effect.
+
+```js
+wb.play('1111010100111000');
+```
