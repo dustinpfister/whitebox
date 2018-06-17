@@ -22,6 +22,16 @@
         // game mode is last three bits
         this.gameMode = parseInt(this.string.slice(13, 16), 2);
 
+        // set boolean array
+        this.bools = new Array(5).map.call(this.string.slice(8, 13), function (b) {
+
+            return b === '1';
+
+        });
+
+        // set the spectrum value
+        this.spectrum = parseInt(this.string.slice(0,8),2) / 255;
+
     };
 
 }
