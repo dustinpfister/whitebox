@@ -3,5 +3,17 @@
 One idea that I seek to implement in this project is the concept of something I have come to call a jumper string. This is a binary string that sets white box up with a certain state, informing white box of certain things like, what game mode is to be used, what features are enabled, and things to that effect.
 
 ```js
-wb.play('1111010100111000');
+wb.play('1111010100111100');
 ```
+
+## String break down
+
+For the first version of white box I think the first three bits all the way to the right should be used to set the game mode which will allow for eight game modes. The remaining 5 bits of the first byte will set up to five boolean values for each game mode, that will enable or disable certain features of the current game mode. The remaining byte will then be used to set a spectrum value from 0 to 255
+
+So then this string:
+
+```
+10000011 00111 100
+```
+
+will be game mode 4 with three features enabled, and two disabled, with its spectrum value set to 131/255.
