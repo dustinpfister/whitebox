@@ -2,6 +2,7 @@
 
 * 0.0.x
 
-  * started a wb_jumper_string.js file that is used to read a jumper string
-  * game mode folders
-  * uses phaser for state management
+  * (done) started a wb_jumper_string.js file that is used to read a jumper string
+  * (done) game mode folder 0 started
+  * (done) uses phaser for state management
+  * (done) wb_gfx.js file for making simple sprites with Phaser Graphics
