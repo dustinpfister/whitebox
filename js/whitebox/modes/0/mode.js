@@ -30,12 +30,18 @@ wb.addMode('0', function () {
 
             var gfx = game.data.cursor;
 
-            gfx.x += 5;
-			gfx.y += 7;
+            wb.controlCursor();
+
+            if (game.data.down) {
+
+                gfx.x += game.data.dx * 5;
+                gfx.y += game.data.dy * 5;
+
+            }
 
             // bounds
-            gfx.x = modulo(gfx.x,game.world.width-gfx.width);
-            gfx.y = modulo(gfx.y,game.world.height-gfx.height);
+            gfx.x = modulo(gfx.x, game.world.width - gfx.width);
+            gfx.y = modulo(gfx.y, game.world.height - gfx.height);
 
         }
 
