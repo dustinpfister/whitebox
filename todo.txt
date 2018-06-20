@@ -6,4 +6,5 @@
   * (done) game mode folder 0 started
   * (done) uses phaser for state management
   * (done) wb_gfx.js file for making simple sprites with Phaser Graphics
-  * standard input system for keyboard, mouse, and touch (just movement, and single action button for now)
+  * (done) wb_control.js file
+  * (done) standard cursor control
