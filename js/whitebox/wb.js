@@ -14,6 +14,7 @@ var wb = (function () {
         opt.pxSize = opt.pxSize || 1;
         opt.layers = opt.layers || [[1, 1, 1, 1, 0, 1, 1, 1, 1]];
         opt.width = opt.width || 3;
+        opt.sheet = opt.sheet || false; // is this a sprite sheet
 
         var gfx = game.add.graphics(0, 0);
 
@@ -45,16 +46,22 @@ var wb = (function () {
             layer.forEach(function (cIndex, i) {
 
                 var x = i % opt.width,
-                y = Math.floor(i / opt.width);
+                y = Math.floor(i / opt.width),
+
+                xOff = opt.spriteSheet ? i * opt.w : 1;
 
                 // if a cIndex value that is out of range, or if the color evaluates to false
                 // then this will result in the transparent color
-                if ((cIndex >= 0 && cIndex <= opt.palette.length) || !opt.palette[cIndex]) {
+                if (cIndex >= 0 && cIndex <= opt.palette.length) {
 
-                    // else it will be filled the color
-                    gfx.beginFill(opt.palette[cIndex]);
-                    gfx.drawRect(x * opt.pxSize, y * opt.pxSize, opt.pxSize, opt.pxSize);
-                    gfx.endFill();
+                    if (!!opt.palette[cIndex]) {
+
+                        // else it will be filled the color
+                        gfx.beginFill(opt.palette[cIndex]);
+                        gfx.drawRect(x * opt.pxSize * xOff, y * opt.pxSize, opt.pxSize, opt.pxSize);
+                        gfx.endFill();
+
+                    }
 
                 }
 

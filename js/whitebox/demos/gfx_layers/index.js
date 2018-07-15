@@ -6,7 +6,7 @@ game.state.add('gfx', {
 
     create: function () {
 
-        console.log('Create Static gfx');
+        console.log('Create Static gfx layers');
 
         var gfx = wb.GFX({
                 game: game,
