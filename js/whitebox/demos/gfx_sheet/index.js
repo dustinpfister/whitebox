@@ -10,13 +10,13 @@ game.state.add('gfx', {
 
         var gfx = wb.GFX({
                 game: game,
-                palette: [0x0000ff, 0x00ffff],
+                palette: [null,0x0000ff,0x00ffff],
                 width: 4,
                 pxSize: 10,
-                frames: [-1, 0, 0, -1,
-                         0, 1, 1, 0,
-                         0, 1, 1, 0,
-                         -1, 0, 0, -1]
+                layers: [[0, 1, 1, 0,
+                          1, 2, 2, 1,
+                          1, 2, 2, 1,
+                          0, 1, 1, 0]]
             })
 
     }

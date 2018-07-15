@@ -4,7 +4,7 @@ var wb = (function () {
 
     // wb.GFX -
     // Make a phaser Graphics Display Object from one or more arrays of color index values
-    // Or an 
+    // Or an
     api.GFX = function (opt) {
 
         opt = opt || {};
@@ -41,15 +41,15 @@ var wb = (function () {
                 }
                     ()) : layer;
 
-
             // for each pxData value in the layer / frame
             layer.forEach(function (cIndex, i) {
 
                 var x = i % opt.width,
                 y = Math.floor(i / opt.width);
 
-                // and cIndex value that is out of range, will be transparent
-                if (cIndex >= 0 && cIndex <= opt.palette.length) {
+                // if a cIndex value that is out of range, or if the color evaluates to false
+                // then this will result in the transparent color
+                if ((cIndex >= 0 && cIndex <= opt.palette.length) || !opt.palette[cIndex]) {
 
                     // else it will be filled the color
                     gfx.beginFill(opt.palette[cIndex]);
