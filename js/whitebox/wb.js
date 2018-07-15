@@ -2,7 +2,9 @@ var wb = (function () {
 
     var api = {};
 
-    // wb.GFX - Make a phaser Graphics Display Object from an array of color index values
+    // wb.GFX -
+    // Make a phaser Graphics Display Object from one or more arrays of color index values
+    // Or an 
     api.GFX = function (opt) {
 
         opt = opt || {};
@@ -39,9 +41,8 @@ var wb = (function () {
                 }
                     ()) : layer;
 
-            console.log(layer);
 
-            // for each px in the data.f array
+            // for each pxData value in the layer / frame
             layer.forEach(function (cIndex, i) {
 
                 var x = i % opt.width,
