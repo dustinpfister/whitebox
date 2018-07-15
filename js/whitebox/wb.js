@@ -3,19 +3,6 @@ var wb = (function () {
     var api = {};
 
     // wb.GFX - Make a phaser Graphics Display Object from an array of color index values
-    /*
-    var gfx = wb.GFX({
-    game: game,
-    palette: [0x0000ff, 0x00ffff],
-    width: 4,
-    pxSize: 10,
-    data: [-1, 0, 0, -1,
-    0, 1, 1, 0,
-    0, 1, 1, 0,
-    -1, 0, 0, -1]
-    })
-     */
-
     api.GFX = function (opt) {
 
         opt = opt || {};
@@ -29,6 +16,27 @@ var wb = (function () {
         var gfx = game.add.graphics(0, 0);
 
         opt.layers.forEach(function (layer) {
+
+            // use a function to create an array, or just use a literal array
+            layer = layer.constructor.name === 'Function' ? (function () {
+
+                    var i = 0,
+                    len = opt.width * opt.width,
+                    pxData = [];
+                    while (i < len) {
+
+                        pxData.push(layer());
+
+                        i += 1;
+
+                    }
+
+                    return pxData;
+
+                }
+                    ()) : layer;
+					
+			console.log(layer);
 
             // for each px in the data.f array
             layer.forEach(function (cIndex, i) {
