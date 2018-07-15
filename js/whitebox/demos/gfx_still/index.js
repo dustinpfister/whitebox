@@ -15,13 +15,25 @@ game.state.add('gfx', {
                 pxSize: 10,
                 layers: [
                     [0, 0, 0, 0,
-                        0, 1, 1, 0,
-                        0, 1, 1, 0,
+                        0, 0, 0, 0,
+                        0, 0, 0, 0,
                         0, 0, 0, 0],
 
-                    function () {
+                    function (x, y, i) {
 
-                        return 2;
+                        if (x == 1) {
+
+                            return 2;
+
+                        }
+
+                        if (y == 1) {
+
+                            return 1;
+
+                        }
+
+                        return -1;
 
                     }
                 ]

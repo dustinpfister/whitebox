@@ -25,7 +25,10 @@ var wb = (function () {
                     pxData = [];
                     while (i < len) {
 
-                        pxData.push(layer());
+                        var x = i % opt.width,
+                        y = Math.floor(i / opt.width);
+
+                        pxData.push(layer(x, y, i));
 
                         i += 1;
 
@@ -35,8 +38,8 @@ var wb = (function () {
 
                 }
                     ()) : layer;
-					
-			console.log(layer);
+
+            console.log(layer);
 
             // for each px in the data.f array
             layer.forEach(function (cIndex, i) {
