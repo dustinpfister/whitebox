@@ -13,6 +13,7 @@ game.state.add('gfx', {
                 palette: [null, 0x0000ff, 0x00ffff, 0x00ff00],
                 width: 4,
                 pxSize: 10,
+				sheet: true,
                 layers: [
                     [3, 1, 1, 3,
                      1, 0, 0, 1,

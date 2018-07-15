@@ -18,7 +18,7 @@ var wb = (function () {
 
         var gfx = game.add.graphics(0, 0);
 
-        opt.layers.forEach(function (layer) {
+        opt.layers.forEach(function (layer,li) {
 
             // use a function to create an array, or just use a literal array
             layer = layer.constructor.name === 'Function' ? (function () {
@@ -48,7 +48,8 @@ var wb = (function () {
                 var x = i % opt.width,
                 y = Math.floor(i / opt.width),
 
-                xOff = opt.spriteSheet ? i * opt.w : 1;
+                // treat as frames rather than layers?
+                xOff = opt.sheet ? li * opt.width * opt.pxSize : 0;
 
                 // if a cIndex value that is out of range, or if the color evaluates to false
                 // then this will result in the transparent color
@@ -58,7 +59,7 @@ var wb = (function () {
 
                         // else it will be filled the color
                         gfx.beginFill(opt.palette[cIndex]);
-                        gfx.drawRect(x * opt.pxSize * xOff, y * opt.pxSize, opt.pxSize, opt.pxSize);
+                        gfx.drawRect(x * opt.pxSize + xOff, y * opt.pxSize, opt.pxSize, opt.pxSize);
                         gfx.endFill();
 
                     }
