@@ -8,10 +8,25 @@
     // add game mode method
     w.wb.addMode = function (index, factory) {
 
-        this.game.state.add('mode-' + index, factory());
+        this.game.state.add(
+
+            // a game mode just adds a single state,
+            // eveything else should be part of a standard
+            // framework inside whitebox
+            'mode-' + index,
+
+            // call the factory function of the mode,
+            // and give a standard api to work with
+            // when makeing a mode via the this keyword
+            factory.call({
+
+                game: game, // a reference to the Phaser game instance
+                gfx: w.wb.gfx // the whitebox graphics api
+
+
+            }));
 
     };
-
 
     // add boot state
     game.state.add('mode-select', {

@@ -2,6 +2,14 @@
 
 * 0.0.x
 
+  * start mode 1 that will be a simple racing game mode.
+  * have feature 0 for mode 0
+  * have feature 1 for mode 0
+  * have feature 2 for mode 0
+  * have feature 3 for mode 0
+  * have feature 4 for mode 0
+  * have mode-select state allow for game mode selection.
+
   * (done) started a wb_jumper_string.js file that is used to read a jumper string
   * (done) game mode folder 0 started
   * (done) uses phaser for state management

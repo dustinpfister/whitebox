@@ -16,7 +16,7 @@ wb.addMode('0', function () {
             // create cursor sprite
             var gfx = game.data.cursor = wb.mkgfx({
                     w: 4,
-                    pSize: 8,
+                    pSize: 4,
                     f: [1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1]
                 });
 
@@ -30,12 +30,13 @@ wb.addMode('0', function () {
 
             var gfx = game.data.cursor;
 
+            // use cursor control
             wb.controlCursor();
 
             if (game.data.down) {
 
-                gfx.x += game.data.dx * 5;
-                gfx.y += game.data.dy * 5;
+                gfx.x += game.data.dx * 1;
+                gfx.y += game.data.dy * 1;
 
             }
 
