@@ -6,18 +6,24 @@ game.state.add('gfx', {
 
     create: function () {
 
-        console.log('Create Static gfx');
+        console.log('C	reate Static gfx');
 
         var gfx = wb.GFX({
                 game: game,
-                palette: [0xff0000, 0x00ff00, 0x0000ff],
+                palette: [0x0000ff, 0x00ffff,0x00ff00],
                 width: 4,
                 pxSize: 10,
-                frames: [0, 0, 0, 0,
-                    0, 1, 1, 0,
-                    0, 1, 1, 0,
-                    0, 0, 0, 0]
-            })
+                layers: [
+                            [-1, 0, 0, -1,
+                              0, 1, 1, 0,
+                              0, 1, 1, 0,
+                              -1, 0, 0, -1],
+                            [-1, -1, -1, -1,
+                             -1, 2, -1, -1,
+                             -1, -1, 2, -1,
+                             -1, -1, -1, -1]
+                ]
+            });
 
     }
 
