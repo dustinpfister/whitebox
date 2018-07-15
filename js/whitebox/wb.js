@@ -2,29 +2,39 @@ var wb = (function () {
 
     var api = {};
 
-    // The Graphics Class
-    api.GFX = function (data) {
+    // The Graphics Helper
+    /*
+    var gfx = new wb.GFX({
+        width: 4,
+        pSize: 4,
+        frames: [1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1]
+    })
+     */
 
-        // should be there
-        var game = this.game,
-        palette = [0x000000, 0xffffff],
-        pxSize = 1,
-        gfx = game.add.graphics(0, 0);
+    api.GFX = function (opt) {
 
-        pxSize = data.pSize || 1;
+        opt = opt || {};
+
+        opt.game = opt.game || new Phaser.Game();
+        opt.palette = opt.palette || [0xffffff, 0x000000];
+        opt.pxSize = opt.pxSize || 1;
+        opt.frames = opt.frames || [1, 1, 1, 1, 0, 1, 1, 1, 1];
+        opt.width = opt.width || 3;
+
+        var gfx = game.add.graphics(0, 0);
 
         // for each px in the data.f array
-        data.f.forEach(function (cIndex, i) {
+        opt.frames.forEach(function (cIndex, i) {
 
-            var x = i % data.w,
-            y = Math.floor(i / data.w);
+            var x = i % opt.width,
+            y = Math.floor(i / opt.width);
 
             // and cIndex value that is out of range, will be transparent
-            if (cIndex >= 0 && cIndex <= palette.length) {
+            if (cIndex >= 0 && cIndex <= opt.palette.length) {
 
                 // else it will be filled the color
-                gfx.beginFill(palette[cIndex]);
-                gfx.drawRect(x * pxSize, y * pxSize, pxSize, pxSize);
+                gfx.beginFill(opt.palette[cIndex]);
+                gfx.drawRect(x * opt.pxSize, y * opt.pxSize, opt.pxSize, opt.pxSize);
                 gfx.endFill();
 
             }
@@ -37,4 +47,4 @@ var wb = (function () {
 
     return api;
 
-});
+}());
