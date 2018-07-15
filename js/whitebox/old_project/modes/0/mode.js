@@ -8,6 +8,28 @@ wb.addMode('0', function () {
 
     };
 
+	/*
+    // set an 'action' control handler, this type of method will be fired for each frame
+    this.controls.action(function (control, data) {
+
+        // control.move.active - true if movement is currently happening
+        // control.move.radian - movement direction in radians
+        // control.move.dx - a delta x value for movement
+        // control.move.dy - a delta y value for movement
+        // control.action - true
+        data.dx = 0;
+        data.dy = 0;
+
+        if (control.move.active) {
+
+            data.dx = control.move.dx;
+            data.dx = control.move.dy;
+
+        }
+
+    });
+	*/
+
     // return the phaser state object to be used
     return {
 

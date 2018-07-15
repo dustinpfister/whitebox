@@ -21,8 +21,7 @@
             factory.call({
 
                 game: game, // a reference to the Phaser game instance
-                gfx: w.wb.gfx // the whitebox graphics api
-
+                gfx: w.wb.gfx, // the whitebox graphics api
 
             }));
 
