@@ -118,15 +118,33 @@ var wb = (function () {
             this.sheet = true;
             this.processDispObj();
 
-            console.log(this.dispObj.width, this.dispObj.height);
-
             var texture = this.dispObj.generateTexture();
 
+			texture.width = 80;
+			texture.crop.width = 80;
+			texture.frame.width = 80;
+			texture.baseTexture.width = 80;
+			
+			//texture.baseTexture.source.width = 80;
+			
+			var canvas = document.createElement('canvas'),
+			ctx = canvas.getContext('2d');
+			canvas.width = 80;
+			canvas.height = 40;
+			
+			ctx.fillStyle='#00ff00';
+			ctx.fillRect(0,0,40,40);
+			
+			ctx.fillStyle='#ff0000';
+			ctx.fillRect(40,0,40,40);
+			
+			console.log(texture.baseTexture.source);
+			
             // add to cache
             this.game.cache.addSpriteSheet(
                 opt.key,
                 null,
-                texture.baseTexture.source,
+                canvas, //texture.baseTexture.source,
                 this.width * this.pxSize,
                 this.width * this.pxSize,
                 this.layers.length,
