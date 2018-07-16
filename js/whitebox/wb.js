@@ -68,6 +68,9 @@ var wb = (function () {
 
             var gfx = this;
 
+            // clear the display object
+            this.dispObj.clear();
+
             this.layers.forEach(function (layer, li) {
 
                 // for each pxData value in the layer / frame
@@ -106,6 +109,11 @@ var wb = (function () {
             option = options || {};
 
             var texture = this.dispObj.generateTexture();
+
+            this.sheet = true;
+
+            // for all layers/frames
+            this.processDispObj();
 
             // add to cache
             this.game.cache.addSpriteSheet('sheet', null, texture.baseTexture.source, this.width, this.width, this.layers.length, 0, 0);

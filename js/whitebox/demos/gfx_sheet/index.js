@@ -13,7 +13,7 @@ game.state.add('gfx', {
                 palette: [null, 0x0000ff, 0x00ffff, 0x00ff00],
                 width: 4,
                 pxSize: 10,
-                sheet: true,
+                //sheet: true,
                 layers: [
                     [3, 1, 1, 3,
                         1, 0, 0, 1,
@@ -22,16 +22,11 @@ game.state.add('gfx', {
                     [0, 0, 0, 0,
                         0, 2, 2, 0,
                         0, 2, 2, 0,
-                        0, 0, 0, 0],
-						
-						function(){
-							
-							return 1;
-							
-						}]
+                        0, 0, 0, 0]
+                ]
             });
-			
-		console.log(gfx.generateSheet());
+
+        console.log(gfx.generateSheet());
 
     }
 
