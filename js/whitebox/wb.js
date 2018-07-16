@@ -17,7 +17,9 @@ var wb = (function () {
             this.layers = opt.layers || [[1, 1, 1, 1, 0, 1, 1, 1, 1]];
             this.width = opt.width || 3;
             this.sheet = opt.sheet || false; // is this a sprite sheet?
+
             this.dispObj = game.add.graphics(0, 0);
+            // this.dispObj = new Phaser.Graphics(this.game,0,0);//game.add.graphics(0, 0);
 
             let gfx = this;
 
@@ -91,7 +93,7 @@ var wb = (function () {
                             // else it will be filled the color
                             gfx.dispObj.beginFill(gfx.palette[cIndex]);
                             gfx.dispObj.drawRect(x * gfx.pxSize + xOff, y * gfx.pxSize, gfx.pxSize, gfx.pxSize);
-                            gfx.dispObj.endFill();
+                            //gfx.dispObj.endFill();
 
                         }
 
@@ -100,6 +102,8 @@ var wb = (function () {
                 });
 
             });
+
+            //console.log(this.dispObj.width, this.dispObj.height);
 
         };
 
@@ -114,10 +118,20 @@ var wb = (function () {
             this.sheet = true;
             this.processDispObj();
 
+            console.log(this.dispObj.width, this.dispObj.height);
+
             var texture = this.dispObj.generateTexture();
 
             // add to cache
-            this.game.cache.addSpriteSheet(opt.key, null, texture.baseTexture.source, this.width, this.width, this.layers.length, 0, 0);
+            this.game.cache.addSpriteSheet(
+                opt.key,
+                null,
+                texture.baseTexture.source,
+                this.width * this.pxSize,
+                this.width * this.pxSize,
+                this.layers.length,
+                0,
+                0);
 
             // return the sheet
             return this.game.cache._cache.image[opt.key];

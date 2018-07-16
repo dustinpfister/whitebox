@@ -6,8 +6,6 @@ game.state.add('gfx', {
 
     create: function () {
 
-        console.log('Create Static gfx');
-
         var gfx = new wb.GFX({
                 game: game,
                 palette: [null, 0x0000ff, 0x00ffff, 0x00ff00],
@@ -26,7 +24,9 @@ game.state.add('gfx', {
                 ]
             });
 
-        console.log(gfx.generateSheet({key:'foo'}));
+        gfx.generateSheet({key:'foo'});
+		
+		var sprite = game.add.sprite(100,100,'foo',1);
 
     }
 
