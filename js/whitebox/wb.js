@@ -26,35 +26,7 @@ var wb = (function () {
             this.buildLayers();
 
             // for all layers/frames
-            this.layers.forEach(function (layer, li) {
-
-                // for each pxData value in the layer / frame
-                layer.forEach(function (cIndex, i) {
-
-                    var x = i % opt.width,
-                    y = Math.floor(i / opt.width),
-
-                    // treat as frames rather than layers?
-                    xOff = opt.sheet ? li * opt.width * opt.pxSize : 0;
-
-                    // if a cIndex value that is out of range, or if the color evaluates to false
-                    // then this will result in the transparent color
-                    if (cIndex >= 0 && cIndex <= opt.palette.length) {
-
-                        if (!!opt.palette[cIndex]) {
-
-                            // else it will be filled the color
-                            gfx.dispObj.beginFill(gfx.palette[cIndex]);
-                            gfx.dispObj.drawRect(x * gfx.pxSize + xOff, y * gfx.pxSize, gfx.pxSize, gfx.pxSize);
-                            gfx.dispObj.endFill();
-
-                        }
-
-                    }
-
-                });
-
-            });
+            this.processDispObj();
 
         };
 
@@ -88,6 +60,43 @@ var wb = (function () {
                         ()) : layer;
 
                 });
+
+        };
+
+        // process the display object from the layers array
+        GFX.prototype.processDispObj = function () {
+
+            var gfx = this;
+
+            this.layers.forEach(function (layer, li) {
+
+                // for each pxData value in the layer / frame
+                layer.forEach(function (cIndex, i) {
+
+                    var x = i % gfx.width,
+                    y = Math.floor(i / gfx.width),
+
+                    // treat as frames rather than layers?
+                    xOff = gfx.sheet ? li * gfx.width * gfx.pxSize : 0;
+
+                    // if a cIndex value that is out of range, or if the color evaluates to false
+                    // then this will result in the transparent color
+                    if (cIndex >= 0 && cIndex <= gfx.palette.length) {
+
+                        if (!!gfx.palette[cIndex]) {
+
+                            // else it will be filled the color
+                            gfx.dispObj.beginFill(gfx.palette[cIndex]);
+                            gfx.dispObj.drawRect(x * gfx.pxSize + xOff, y * gfx.pxSize, gfx.pxSize, gfx.pxSize);
+                            gfx.dispObj.endFill();
+
+                        }
+
+                    }
+
+                });
+
+            });
 
         };
 
