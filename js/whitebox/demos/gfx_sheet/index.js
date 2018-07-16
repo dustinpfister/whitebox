@@ -26,7 +26,7 @@ game.state.add('gfx', {
                 ]
             });
 
-        console.log(gfx.generateSheet());
+        console.log(gfx.generateSheet({key:'foo'}));
 
     }
 

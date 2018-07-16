@@ -104,22 +104,23 @@ var wb = (function () {
         };
 
         // create a sprite sheet, and add to cache
-        GFX.prototype.generateSheet = function (options) {
+        GFX.prototype.generateSheet = function (opt) {
 
-            option = options || {};
+            opt = opt || {};
+
+            opt.key = opt.key || 'sheet' + Object.keys(this.game.cache._cache.image).length;
+
+            // set sheet to true if not all ready before hand
+            this.sheet = true;
+            this.processDispObj();
 
             var texture = this.dispObj.generateTexture();
 
-            this.sheet = true;
-
-            // for all layers/frames
-            this.processDispObj();
-
             // add to cache
-            this.game.cache.addSpriteSheet('sheet', null, texture.baseTexture.source, this.width, this.width, this.layers.length, 0, 0);
+            this.game.cache.addSpriteSheet(opt.key, null, texture.baseTexture.source, this.width, this.width, this.layers.length, 0, 0);
 
             // return the sheet
-            return this.game.cache._cache.image['sheet'];
+            return this.game.cache._cache.image[opt.key];
 
         };
 
