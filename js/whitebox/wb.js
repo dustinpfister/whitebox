@@ -9,27 +9,28 @@ var wb = (function () {
 
         opt = opt || {};
 
-        opt.game = opt.game || new Phaser.Game();
-        opt.palette = opt.palette || [0xffffff, 0x000000];
-        opt.pxSize = opt.pxSize || 1;
-        opt.layers = opt.layers || [[1, 1, 1, 1, 0, 1, 1, 1, 1]];
-        opt.width = opt.width || 3;
-        opt.sheet = opt.sheet || false; // is this a sprite sheet
+        this.game = opt.game || new Phaser.Game();
+        this.palette = opt.palette || [0xffffff, 0x000000];
+        this.pxSize = opt.pxSize || 1;
+        this.layers = opt.layers || [[1, 1, 1, 1, 0, 1, 1, 1, 1]];
+        this.width = opt.width || 3;
+        this.sheet = opt.sheet || false; // is this a sprite sheet
 
-        var gfx = game.add.graphics(0, 0);
+        var dispObj = game.add.graphics(0, 0);
 
-        opt.layers.forEach(function (layer,li) {
+		let gfx = this;
+        this.layers.forEach(function (layer,li) {
 
             // use a function to create an array, or just use a literal array
             layer = layer.constructor.name === 'Function' ? (function () {
 
                     var i = 0,
-                    len = opt.width * opt.width,
+                    len = gfx.width * gfx.width,
                     pxData = [];
                     while (i < len) {
 
-                        var x = i % opt.width,
-                        y = Math.floor(i / opt.width);
+                        var x = i % gfx.width,
+                        y = Math.floor(i / gfx.width);
 
                         pxData.push(layer(x, y, i));
 
@@ -58,9 +59,9 @@ var wb = (function () {
                     if (!!opt.palette[cIndex]) {
 
                         // else it will be filled the color
-                        gfx.beginFill(opt.palette[cIndex]);
-                        gfx.drawRect(x * opt.pxSize + xOff, y * opt.pxSize, opt.pxSize, opt.pxSize);
-                        gfx.endFill();
+                        dispObj.beginFill(gfx.palette[cIndex]);
+                        dispObj.drawRect(x * gfx.pxSize + xOff, y * gfx.pxSize, gfx.pxSize, gfx.pxSize);
+                        dispObj.endFill();
 
                     }
 
@@ -70,7 +71,7 @@ var wb = (function () {
 
         });
 
-        return gfx;
+        //return dispObj;
 
     };
 

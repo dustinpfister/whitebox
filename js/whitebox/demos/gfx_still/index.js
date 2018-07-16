@@ -8,7 +8,7 @@ game.state.add('gfx', {
 
         console.log('Create Static gfx');
 
-        var gfx = wb.GFX({
+        var gfx = new wb.GFX({
                 game: game,
                 palette: [0xff0000, 0x00ff00],
                 width: 4,
