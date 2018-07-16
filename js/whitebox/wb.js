@@ -16,34 +16,17 @@ var wb = (function () {
             this.pxSize = opt.pxSize || 1;
             this.layers = opt.layers || [[1, 1, 1, 1, 0, 1, 1, 1, 1]];
             this.width = opt.width || 3;
-            this.sheet = opt.sheet || false; // is this a sprite sheet
-
+            this.sheet = opt.sheet || false; // is this a sprite sheet?
             this.dispObj = game.add.graphics(0, 0);
 
             let gfx = this;
+
+            // run any methods that are given in place of
+            // literal arrays
+            this.buildLayers();
+
+            // for all layers/frames
             this.layers.forEach(function (layer, li) {
-
-                // use a function to create an array, or just use a literal array
-                layer = layer.constructor.name === 'Function' ? (function () {
-
-                        var i = 0,
-                        len = gfx.width * gfx.width,
-                        pxData = [];
-                        while (i < len) {
-
-                            var x = i % gfx.width,
-                            y = Math.floor(i / gfx.width);
-
-                            pxData.push(layer(x, y, i));
-
-                            i += 1;
-
-                        }
-
-                        return pxData;
-
-                    }
-                        ()) : layer;
 
                 // for each pxData value in the layer / frame
                 layer.forEach(function (cIndex, i) {
@@ -75,8 +58,43 @@ var wb = (function () {
 
         };
 
+        // run over layers, and call any methods to make a pure array of color index values
+        GFX.prototype.buildLayers = function () {
+
+            var gfx = this;
+
+            this.layers = this.layers.map(function (layer, li) {
+
+                    // use a function to create an array, or just use a literal array
+                    return layer.constructor.name === 'Function' ? (function () {
+
+                        var i = 0,
+                        len = gfx.width * gfx.width,
+                        pxData = [];
+                        while (i < len) {
+
+                            var x = i % gfx.width,
+                            y = Math.floor(i / gfx.width);
+
+                            pxData.push(layer(x, y, i));
+
+                            i += 1;
+
+                        }
+
+                        return pxData;
+
+                    }
+                        ()) : layer;
+
+                });
+
+        };
+
         // create a sprite sheet, and add to cache
-        GFX.prototype.generateSheet = function () {
+        GFX.prototype.generateSheet = function (options) {
+
+            option = options || {};
 
             var texture = this.dispObj.generateTexture();
 
