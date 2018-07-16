@@ -103,7 +103,54 @@ var wb = (function () {
 
             });
 
-            //console.log(this.dispObj.width, this.dispObj.height);
+        };
+
+        // generate and return a canvas element from layers, not using Phaser Graphics
+        GFX.prototype.genCanvas = function () {
+
+            var gfx = this;
+
+            // generate the canvas element
+            var canvas = document.createElement('canvas'),
+            ctx = canvas.getContext('2d');
+            canvas.width = 80;
+            canvas.height = 40;
+			
+			document.body.appendChild(canvas);
+
+            this.layers.forEach(function (layer, li) {
+
+                // for each pxData value in the layer / frame
+                layer.forEach(function (cIndex, i) {
+
+                    var x = i % gfx.width,
+                    y = Math.floor(i / gfx.width),
+
+                    // treat as frames rather than layers?
+                    xOff = gfx.sheet ? li * gfx.width * gfx.pxSize : 0;
+
+                    // if a cIndex value that is out of range, or if the color evaluates to false
+                    // then this will result in the transparent color
+                    if (cIndex >= 0 && cIndex <= gfx.palette.length) {
+
+                        if (!!gfx.palette[cIndex]) {
+
+						    var color = gfx.palette[cIndex];
+							
+							console.log(color.toString(16));
+						
+                            ctx.fillStyle = '#ffffff';
+                            ctx.fillRect(x * gfx.pxSize + xOff, y * gfx.pxSize, gfx.pxSize, gfx.pxSize);
+
+                        }
+
+                    }
+
+                });
+
+            });
+
+            return canvas;
 
         };
 
@@ -120,31 +167,31 @@ var wb = (function () {
 
             var texture = this.dispObj.generateTexture();
 
-			texture.width = 80;
-			texture.crop.width = 80;
-			texture.frame.width = 80;
-			texture.baseTexture.width = 80;
-			
-			//texture.baseTexture.source.width = 80;
-			
-			var canvas = document.createElement('canvas'),
-			ctx = canvas.getContext('2d');
-			canvas.width = 80;
-			canvas.height = 40;
-			
-			ctx.fillStyle='#00ff00';
-			ctx.fillRect(0,0,40,40);
-			
-			ctx.fillStyle='#ff0000';
-			ctx.fillRect(40,0,40,40);
-			
-			console.log(texture.baseTexture.source);
-			
+            texture.width = 80;
+            texture.crop.width = 80;
+            texture.frame.width = 80;
+            texture.baseTexture.width = 80;
+
+            //texture.baseTexture.source.width = 80;
+
+            var canvas = document.createElement('canvas'),
+            ctx = canvas.getContext('2d');
+            canvas.width = 80;
+            canvas.height = 40;
+
+            ctx.fillStyle = '#00ff00';
+            ctx.fillRect(0, 0, 40, 40);
+
+            ctx.fillStyle = '#ff0000';
+            ctx.fillRect(40, 0, 40, 40);
+
+            console.log(texture.baseTexture.source);
+
             // add to cache
             this.game.cache.addSpriteSheet(
                 opt.key,
                 null,
-                canvas, //texture.baseTexture.source,
+                this.genCanvas(),//canvas, //texture.baseTexture.source,
                 this.width * this.pxSize,
                 this.width * this.pxSize,
                 this.layers.length,
