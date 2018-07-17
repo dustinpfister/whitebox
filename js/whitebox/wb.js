@@ -18,17 +18,26 @@ var wb = (function () {
             this.width = opt.width || 3;
             this.sheet = opt.sheet || false; // is this a sprite sheet?
 
-            this.dispObj = game.add.graphics(0, 0);
+            //this.dispObj = game.add.graphics(0, 0);
             // this.dispObj = new Phaser.Graphics(this.game,0,0);//game.add.graphics(0, 0);
 
-            let gfx = this;
+			/*
+			this.palette.map(function(color){
+				
+				return new Phaser.Color(color);
+				
+			});
+			
+			
+			console.log(Phaser.Color.getWebRGB(0x00ffff));
+*/			
 
             // run any methods that are given in place of
             // literal arrays
             this.buildLayers();
 
             // for all layers/frames
-            this.processDispObj();
+            //this.processDispObj();
 
         };
 
@@ -113,10 +122,10 @@ var wb = (function () {
             // generate the canvas element
             var canvas = document.createElement('canvas'),
             ctx = canvas.getContext('2d');
-            canvas.width = 80;
-            canvas.height = 40;
-			
-			document.body.appendChild(canvas);
+            canvas.width = this.width * this.pxSize * this.layers.length;
+            canvas.height = this.width * this.pxSize;
+
+            //document.body.appendChild(canvas);
 
             this.layers.forEach(function (layer, li) {
 
@@ -135,11 +144,7 @@ var wb = (function () {
 
                         if (!!gfx.palette[cIndex]) {
 
-						    var color = gfx.palette[cIndex];
-							
-							console.log(color.toString(16));
-						
-                            ctx.fillStyle = '#ffffff';
+                            ctx.fillStyle = Phaser.Color.getWebRGB(gfx.palette[cIndex]);
                             ctx.fillRect(x * gfx.pxSize + xOff, y * gfx.pxSize, gfx.pxSize, gfx.pxSize);
 
                         }
@@ -163,35 +168,12 @@ var wb = (function () {
 
             // set sheet to true if not all ready before hand
             this.sheet = true;
-            this.processDispObj();
-
-            var texture = this.dispObj.generateTexture();
-
-            texture.width = 80;
-            texture.crop.width = 80;
-            texture.frame.width = 80;
-            texture.baseTexture.width = 80;
-
-            //texture.baseTexture.source.width = 80;
-
-            var canvas = document.createElement('canvas'),
-            ctx = canvas.getContext('2d');
-            canvas.width = 80;
-            canvas.height = 40;
-
-            ctx.fillStyle = '#00ff00';
-            ctx.fillRect(0, 0, 40, 40);
-
-            ctx.fillStyle = '#ff0000';
-            ctx.fillRect(40, 0, 40, 40);
-
-            console.log(texture.baseTexture.source);
 
             // add to cache
             this.game.cache.addSpriteSheet(
                 opt.key,
                 null,
-                this.genCanvas(),//canvas, //texture.baseTexture.source,
+                this.genCanvas(), //canvas, //texture.baseTexture.source,
                 this.width * this.pxSize,
                 this.width * this.pxSize,
                 this.layers.length,

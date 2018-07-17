@@ -26,7 +26,7 @@ game.state.add('gfx', {
 
         gfx.generateSheet({key:'foo'});
 		
-		var sprite = game.add.sprite(100,100,'foo',0);
+		var sprite = game.add.sprite(100,100,'foo',1);
 
     }
 
