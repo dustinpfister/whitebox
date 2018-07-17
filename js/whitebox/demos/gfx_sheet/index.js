@@ -24,9 +24,31 @@ game.state.add('gfx', {
                 ]
             });
 
-        gfx.generateSheet({key:'foo'});
-		
-		var sprite = game.add.sprite(100,100,'foo',1);
+        gfx.generateSheet({
+            key: 'foo'
+        });
+
+        // data object for this game
+        this.game.data = {
+
+            sprite: game.add.sprite(100, 100, 'foo', 0),
+            frame: 0,
+            gfx: gfx
+
+        };
+
+    },
+
+    update: function () {
+
+        var data = this.game.data,
+        sprite = data.sprite;
+
+        sprite.frame = data.frame;
+
+        // step frame
+        data.frame += 1;
+        data.frame = data.frame % data.gfx.layers.length;
 
     }
 
