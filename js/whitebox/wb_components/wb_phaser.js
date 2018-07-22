@@ -56,7 +56,14 @@ wb.appendComponent(function () {
         api = {
 
             game: game,
-            data: mode.data
+            data: mode.data,
+            input: {
+                left: false,
+                right: false,
+                up: false,
+                down: false,
+                action: false,
+            }
 
         };
 
@@ -65,6 +72,56 @@ wb.appendComponent(function () {
             create: function () {
 
                 mode.create.call(api);
+
+                this.game.input.keyboard.onDownCallback = function (e) {
+
+                    if (e.code === 'KeyD') {
+
+                        api.input.right = true;
+
+                    }
+                    if (e.code === 'KeyA') {
+
+                        api.input.left = true;
+
+                    }
+                    if (e.code === 'KeyW') {
+
+                        api.input.up = true;
+
+                    }
+                    if (e.code === 'KeyS') {
+
+                        api.input.down = true;
+
+                    }
+
+                };
+
+                this.game.input.keyboard.onUpCallback = function (e) {
+
+                    if (e.code === 'KeyD') {
+
+                        api.input.right = false;
+
+                    }
+                    if (e.code === 'KeyA') {
+
+                        api.input.left = false;
+
+                    }
+                    if (e.code === 'KeyW') {
+
+                        api.input.up = false;
+
+                    }
+                    if (e.code === 'KeyS') {
+
+                        api.input.down = false;
+
+                    }
+
+                };
 
             },
             update: function () {

@@ -41,20 +41,6 @@ wb.addGameMode({
         sprite.x = this.game.world.centerX - sprite.width / 2;
         sprite.y = this.game.world.centerY - sprite.height / 2;
 
-		
-		
-		/*
-        this.data = {
-
-            sprite: sprite,
-            a: 0,
-            delta: 0
-
-        };
-		*/
-
-        console.log(sprite);
-
     },
 
     update: function () {
@@ -63,6 +49,33 @@ wb.addGameMode({
         sprite = data.sprite;
 
         //data.a += 0.001;
+
+        data.delta = 0;
+        if (this.input.left) {
+
+            data.a = Math.PI;
+            data.delta = 1;
+
+        }
+        if (this.input.right) {
+
+            data.a = 0;
+            data.delta = 1;
+
+        }
+
+        if (this.input.up) {
+
+            data.a = -Math.PI/2;
+            data.delta = 1;
+
+        }
+        if (this.input.down) {
+
+            data.a = Math.PI/2;
+            data.delta = 1;
+
+        }
 
         sprite.x += Math.cos(data.a) * data.delta;
         sprite.y += Math.sin(data.a) * data.delta;
