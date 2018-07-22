@@ -52,12 +52,13 @@ wb.appendComponent(function () {
 
         this.game.state.add('mode' + mode.index, {
 
-            create: mode.create
+            create: mode.create,
+            update: mode.update
 
         });
-		
-		// just start the mode for now
-		this.game.state.start('mode'+mode.index);
+
+        // just start the mode for now
+        this.game.state.start('mode' + mode.index);
 
     };
 
