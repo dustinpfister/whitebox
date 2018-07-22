@@ -1,16 +1,20 @@
 
-//console.log('clamp:');
-//console.log(Phaser.Math.clamp(120, 0, 100));
-
-//wrapValue(value, amount, max)
-
-//console.log('wrap value');
-//console.log(Phaser.Math.wrap(-15, 0, 100));
+var xMax = 100,
+xMin = 0,
+x = -15;
+console.log(Phaser.Math.wrap(x, xMin, xMax)); // 85
 
 wb.addGameMode({
 
     index: 0,
     desc: 'cursor',
+
+    data: {
+        sprite: null,
+        a: 0,
+        delta: 0
+    },
+
     create: function () {
 
         var gfx = new wb.GFX({
@@ -33,16 +37,21 @@ wb.addGameMode({
             key: 'logo'
         });
 
-        var sprite = this.game.add.sprite(0, 0, 'logo', 0);
+        var sprite = this.data.sprite = this.game.add.sprite(0, 0, 'logo', 0);
         sprite.x = this.game.world.centerX - sprite.width / 2;
         sprite.y = this.game.world.centerY - sprite.height / 2;
 
+		
+		
+		/*
         this.data = {
 
             sprite: sprite,
-            a: 0
+            a: 0,
+            delta: 0
 
         };
+		*/
 
         console.log(sprite);
 
@@ -53,10 +62,10 @@ wb.addGameMode({
         var data = this.data,
         sprite = data.sprite;
 
-		data.a += 0.001;
-		
-        sprite.x += Math.cos(data.a) * 1;
-        sprite.y += Math.sin(data.a) * 1;
+        //data.a += 0.001;
+
+        sprite.x += Math.cos(data.a) * data.delta;
+        sprite.y += Math.sin(data.a) * data.delta;
 
         sprite.x = Phaser.Math.wrap(sprite.x, -sprite.width, this.game.world.width);
         sprite.y = Phaser.Math.wrap(sprite.y, -sprite.height, this.game.world.height);

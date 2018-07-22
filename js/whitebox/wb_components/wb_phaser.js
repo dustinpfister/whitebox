@@ -50,15 +50,33 @@ wb.appendComponent(function () {
     // set the given game mode
     this.addGameMode = function (mode) {
 
-        this.game.state.add('mode' + mode.index, {
+        var game = this.game,
 
-            create: mode.create,
-            update: mode.update
+        // api
+        api = {
+
+            game: game,
+            data: mode.data
+
+        };
+
+        game.state.add('mode' + mode.index, {
+
+            create: function () {
+
+                mode.create.call(api);
+
+            },
+            update: function () {
+
+                mode.update.call(api);
+
+            }
 
         });
 
         // just start the mode for now
-        this.game.state.start('mode' + mode.index);
+        game.state.start('mode' + mode.index);
 
     };
 
