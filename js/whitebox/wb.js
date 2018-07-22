@@ -1,3 +1,22 @@
+
+var wb = (function(){
+	
+	var api = {
+		
+		// append a white box component
+		appendComponent : function(component){
+			
+			component.call(this);
+			
+		}
+		
+	}
+	
+	return api;
+	
+}());
+
+/*
 var wb = (function () {
 
     var api = {};
@@ -141,3 +160,4 @@ var wb = (function () {
 
 }
     ());
+*/
