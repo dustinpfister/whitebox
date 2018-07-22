@@ -1,6 +1,11 @@
 
-console.log('clamp:');
-console.log(Phaser.Math.clamp(120, 0, 100));
+//console.log('clamp:');
+//console.log(Phaser.Math.clamp(120, 0, 100));
+
+//wrapValue(value, amount, max)
+
+//console.log('wrap value');
+//console.log(Phaser.Math.wrap(-15, 0, 100));
 
 wb.addGameMode({
 
@@ -28,27 +33,33 @@ wb.addGameMode({
             key: 'logo'
         });
 
-        console.log(this);
-
         var sprite = this.game.add.sprite(0, 0, 'logo', 0);
         sprite.x = this.game.world.centerX - sprite.width / 2;
         sprite.y = this.game.world.centerY - sprite.height / 2;
 
         this.data = {
 
-            sprite: sprite
+            sprite: sprite,
+            a: 0
 
         };
+
+        console.log(sprite);
 
     },
 
     update: function () {
 
-        var sprite = this.data.sprite;
+        var data = this.data,
+        sprite = data.sprite;
 
-        sprite.x += 1;
+		data.a += 0.001;
+		
+        sprite.x += Math.cos(data.a) * 1;
+        sprite.y += Math.sin(data.a) * 1;
 
-        sprite.x = Phaser.Math.clamp(sprite.x, 0, this.game.world.width - sprite.width);
+        sprite.x = Phaser.Math.wrap(sprite.x, -sprite.width, this.game.world.width);
+        sprite.y = Phaser.Math.wrap(sprite.y, -sprite.height, this.game.world.height);
 
     }
 
