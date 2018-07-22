@@ -18,26 +18,9 @@ var wb = (function () {
             this.width = opt.width || 3;
             this.sheet = opt.sheet || false; // is this a sprite sheet?
 
-            //this.dispObj = game.add.graphics(0, 0);
-            // this.dispObj = new Phaser.Graphics(this.game,0,0);//game.add.graphics(0, 0);
-
-			/*
-			this.palette.map(function(color){
-				
-				return new Phaser.Color(color);
-				
-			});
-			
-			
-			console.log(Phaser.Color.getWebRGB(0x00ffff));
-*/			
-
             // run any methods that are given in place of
             // literal arrays
             this.buildLayers();
-
-            // for all layers/frames
-            //this.processDispObj();
 
         };
 
@@ -74,45 +57,8 @@ var wb = (function () {
 
         };
 
-        // process the display object from the layers array
-        GFX.prototype.processDispObj = function () {
-
-            var gfx = this;
-
-            // clear the display object
-            this.dispObj.clear();
-
-            this.layers.forEach(function (layer, li) {
-
-                // for each pxData value in the layer / frame
-                layer.forEach(function (cIndex, i) {
-
-                    var x = i % gfx.width,
-                    y = Math.floor(i / gfx.width),
-
-                    // treat as frames rather than layers?
-                    xOff = gfx.sheet ? li * gfx.width * gfx.pxSize : 0;
-
-                    // if a cIndex value that is out of range, or if the color evaluates to false
-                    // then this will result in the transparent color
-                    if (cIndex >= 0 && cIndex <= gfx.palette.length) {
-
-                        if (!!gfx.palette[cIndex]) {
-
-                            // else it will be filled the color
-                            gfx.dispObj.beginFill(gfx.palette[cIndex]);
-                            gfx.dispObj.drawRect(x * gfx.pxSize + xOff, y * gfx.pxSize, gfx.pxSize, gfx.pxSize);
-                            //gfx.dispObj.endFill();
-
-                        }
-
-                    }
-
-                });
-
-            });
-
-        };
+        // generate a sprite, and add it to the cache
+        GFX.prototype.generateSprite = function (opt) {};
 
         // generate and return a canvas element from layers, not using Phaser Graphics
         GFX.prototype.genCanvas = function () {
@@ -165,12 +111,13 @@ var wb = (function () {
             opt = opt || {};
 
             opt.key = opt.key || 'sheet' + Object.keys(this.game.cache._cache.image).length;
+            opt.game = opt.game || this.game;
 
             // set sheet to true if not all ready before hand
             this.sheet = true;
 
             // add to cache
-            this.game.cache.addSpriteSheet(
+            opt.game.cache.addSpriteSheet(
                 opt.key,
                 null,
                 this.genCanvas(), //canvas, //texture.baseTexture.source,
