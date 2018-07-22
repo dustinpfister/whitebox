@@ -24,7 +24,11 @@ game.state.add('gfx', {
                         0, 0, 0, 0]]
             });
 
-        console.log(gfx);
+        gfx.generateSheet({
+            key: 'layers'
+        });
+
+        this.game.add.sprite(0, 0, 'layers', 0);
 
     }
 

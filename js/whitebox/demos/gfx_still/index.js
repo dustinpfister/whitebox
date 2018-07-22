@@ -14,12 +14,18 @@ game.state.add('gfx', {
                 width: 4,
                 pxSize: 10,
                 layers: [
-                    [0, 0, 0, 0,
-                     0, 1, 1, 0,
-                     0, 1, 1, 0,
-                     0, 0, 0, 0]
+                       [0, 0, 0, 0,
+                        0, 1, 1, 0,
+                        0, 1, 1, 0,
+                        0, 0, 0, 0]
                 ]
             });
+
+        gfx.generateSheet({
+            key: 'still'
+        });
+
+        this.game.add.sprite(0, 0, 'still', 0);
 
     }
 
